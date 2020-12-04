@@ -9,6 +9,6 @@ def matrix_shape(matrix):
     if type(matrix) == list:
         if type(matrix[0]) == list:
             return [len(matrix)] + matrix_shape(matrix[0])
-        return  [len(matrix)]
+        return [len(matrix)]
     else:
         return []
