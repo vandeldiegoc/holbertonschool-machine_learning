@@ -10,4 +10,4 @@ def matrix_transpose(matrix):
         for j in matrix:
             temp.append(j[inx])
         new_array.append(temp)
-    return new_array
+    return(new_array)
