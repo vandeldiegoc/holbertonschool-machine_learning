@@ -10,4 +10,4 @@ def add_arrays(arr1, arr2):
     for inx in range(len(arr1)):
         a = arr1[inx] + arr2[inx]
         temp.append(a)
-    return temp
+    return(temp)
