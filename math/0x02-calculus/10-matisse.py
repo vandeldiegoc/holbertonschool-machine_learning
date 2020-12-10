@@ -10,6 +10,5 @@ def poly_derivative(poly):
     if len(poly) == 1:
         return[0]
     for x in range(1, len(poly)):
-        print(poly[x])
         new_list.append(x * poly[x])
     return(new_list)
