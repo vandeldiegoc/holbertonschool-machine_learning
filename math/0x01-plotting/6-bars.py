@@ -19,4 +19,5 @@ plt.bar(group, fruit[1], width=0.5, color='yellow', label=fruits[1], bottom=frui
 plt.bar(group, fruit[2], width=0.5, color='#ff8000', label=fruits[2], bottom=fruit[1] + fruit[0])
 plt.bar(group, fruit[3], width=0.5, color='#ffe5b4', label=fruits[3], bottom=fruit[2] + fruit[1] + fruit[0])
 plt.legend()
+plt.savefig("6-bars.png")
 plt.show()

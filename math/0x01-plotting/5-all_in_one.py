@@ -67,5 +67,5 @@ plt.ylabel('Number of students', fontsize=8)
 plt.title('Project A')
 plt.hist(student_grades, bins=range(0, 100, 10), edgecolor="black")
 plt.tight_layout()
-
+plt.savefig("5-all_in_one.png")
 plt.show()
