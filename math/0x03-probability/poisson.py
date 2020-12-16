@@ -26,6 +26,7 @@ class Poisson:
 
     def pmf(self, k):
         """Calculates the value of the PMF """
+        k = int(k)
         if k < 0:
             return(0)
         f = self.factorial(k)
