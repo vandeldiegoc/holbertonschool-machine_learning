@@ -38,7 +38,7 @@ class Poisson:
         """ Calculates the value of the CDF """
         k = int(k)
         if k < 0:
-            return None
+            return 0
         x = 0
         for floor in range(k+1):
             x += (self.lambtha ** floor) / self.factorial(floor)
