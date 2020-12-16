@@ -20,5 +20,7 @@ class Exponential:
 
     def pdf(self, x):
         """Calculates the value of the PMF """
+        if x < 0:
+            return(0)
         pdf = self.lambtha * (self.euler ** ((-self.lambtha) * x))
         return(pdf)
