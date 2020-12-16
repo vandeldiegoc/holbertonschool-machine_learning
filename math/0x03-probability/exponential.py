@@ -4,7 +4,7 @@
 
 class Exponential:
     """represents an exponential distribution:"""
-    euler = 2.7182818285
+    e = 2.7182818285
 
     def __init__(self, data=None, lambtha=1.):
         if data is None:
@@ -19,8 +19,15 @@ class Exponential:
             self.lambtha = 1 / float(sum(data) / len(data))
 
     def pdf(self, x):
-        """Calculates the value of the PMF """
+        """Calculates the value of the PDF """
         if x < 0:
             return(0)
         pdf = self.lambtha * (self.euler ** ((-self.lambtha) * x))
         return(pdf)
+
+    def cdf(self, x):
+        """Calculates the value of the PMF """
+        if x < 0:
+            return(0)
+        cdf = 1 - (self.e ** ((-self.lambtha) * x))
+        return(cdf)
