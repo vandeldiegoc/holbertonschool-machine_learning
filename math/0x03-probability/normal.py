@@ -5,6 +5,9 @@
 class Normal:
     """ represents a normal distribution """
 
+    p = 3.1415926536
+    e = 2.7182818285
+
     def __init__(self, data=None, mean=0., stddev=1.):
         if data is None:
             if stddev <= 0:
@@ -33,3 +36,9 @@ class Normal:
         """ Calculates the x-value of a given z-score """
         x_v = self.mean + (self.stddev * z)
         return(x_v)
+
+    def pdf(self, x):
+        "Calculates the value of the PDF for a given x-value"
+        pdf1 = 1 / (self.stddev*(2*self.p) ** (1/2))
+        pdf_a = pdf1 * (self.e ** ((-1/2)*((x-self.mean) / self.stddev) ** 2))
+        return(pdf_a)
