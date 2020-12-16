@@ -30,6 +30,6 @@ class Poisson:
         if k < 0:
             return(0)
         f = self.factorial(k)
-        e = 2.718281828459045090795598298428
+        e = 2.7182818285
         calulate = ((self.lambtha ** k) * (e ** -self.lambtha)) / f
         return(calulate)
