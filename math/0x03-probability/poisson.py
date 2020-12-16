@@ -33,3 +33,15 @@ class Poisson:
         e = 2.7182818285
         calulate = ((self.lambtha ** k) * (e ** -self.lambtha)) / f
         return(calulate)
+
+    def cdf(self, k):
+        """ Calculates the value of the CDF """
+        k = int(k)
+        if k <= 0:
+            return None
+        x = 0
+        for floor in range(k+1):
+            x += (self.lambtha ** floor) / self.factorial(floor)
+        e = 2.7182818285
+        calulate = e ** (-self.lambtha) * x
+        return(calulate)
