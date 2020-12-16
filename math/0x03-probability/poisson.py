@@ -37,7 +37,7 @@ class Poisson:
     def cdf(self, k):
         """ Calculates the value of the CDF """
         k = int(k)
-        if k <= 0:
+        if k < 0:
             return None
         x = 0
         for floor in range(k+1):
