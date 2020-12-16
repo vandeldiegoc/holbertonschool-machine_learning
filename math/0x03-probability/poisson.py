@@ -27,6 +27,7 @@ class Poisson:
 
 
 def factorial(n):
+    """ funtion return factorial"""
     if n == 0:
         return 1
     else:
