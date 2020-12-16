@@ -31,5 +31,5 @@ class Poisson:
             return(0)
         f = self.factorial(k)
         e = 2.718281828459045090795598298428
-        calulate = ((e ** -self.lambtha) * (self.lambtha ** k)) / f
+        calulate = ((self.lambtha ** k) * (e ** -self.lambtha)) / f
         return(calulate)
