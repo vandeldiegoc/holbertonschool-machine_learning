@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """module"""
 
+
 class Exponential:
     """represents an exponential distribution:"""
     def __init__(self, data=None, lambtha=1.):
