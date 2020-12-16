@@ -3,13 +3,14 @@
 
 
 class Exponential:
-    """represents an exponential distribution:"""
+    """represents a normal distribution:"""
     e = 2.7182818285
 
     def __init__(self, data=None, lambtha=1.):
         if data is None:
             if lambtha <= 0:
                 raise ValueError("lambtha must be a positive value")
+
             self.lambtha = float(lambtha)
         else:
             if type(data) is not list:
