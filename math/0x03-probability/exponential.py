@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """module"""
 
-
 class Exponential:
     """represents an exponential distribution:"""
     def __init__(self, data=None, lambtha=1.):
@@ -14,4 +13,4 @@ class Exponential:
                 raise TypeError('data must be a list')
             if len(data) <= 1:
                 raise ValueError("data must contain multiple values")
-            self.lambtha = float(100 / sum(data))
+            self.lambtha = 1 / float(sum(data) / len(data))
