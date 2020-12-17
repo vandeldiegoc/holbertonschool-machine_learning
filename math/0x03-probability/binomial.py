@@ -25,3 +25,21 @@ class Binomial:
             v = 1 - (v_1 / mean)
             self.n = round(mean / v)
             self.p = mean / self.n
+
+    @staticmethod
+    def f(n):
+        """ funtion return factorial"""
+        if n == 0:
+            return 1
+        else:
+            return(n * Binomial.f(n-1))
+
+    def pmf(self, k):
+        """ Calculates the value of the PMF"""
+        k = int(k)
+        if k < 0:
+            return(0)
+        q = 1 - self.p
+        pmf_1 = self.f(self.n) / (self.f(self.n-k) * self.f(k))
+        pmf = (pmf_1 * (self.p ** k)) * (q ** (self.n - k))
+        return(pmf)
