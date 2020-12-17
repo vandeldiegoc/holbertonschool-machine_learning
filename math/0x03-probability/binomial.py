@@ -43,3 +43,13 @@ class Binomial:
         pmf_1 = self.f(self.n) / (self.f(self.n-k) * self.f(k))
         pmf = (pmf_1 * (self.p ** k)) * (q ** (self.n - k))
         return(pmf)
+
+    def cdf(self, k):
+        """ Calculates the value of the CDF """
+        k = int(k)
+        if k < 0:
+            return 0
+        v = 0
+        for x in range(k + 1):
+            v += self.pmf(x)
+        return v
