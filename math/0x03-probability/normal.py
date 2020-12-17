@@ -42,3 +42,11 @@ class Normal:
         pdf1 = 1 / (self.stddev*(2*self.p) ** (1/2))
         pdf_a = pdf1 * (self.e ** ((-1/2)*((x-self.mean) / self.stddev) ** 2))
         return(pdf_a)
+
+    def cdf(self, x):
+        "Calculates the value of the CDF for a given x-value"
+
+        c = (x - self.mean) / (self.stddev*(2**(1/2)))
+        erf = (2/(self.p**(1/2))*(c - c**3/3 + c**5/10 - c**7/42 + c**9/216))
+        cdf = (1/2) * (1 + erf)
+        return(cdf)
