@@ -23,7 +23,7 @@ class Exponential:
         """Calculates the value of the PDF """
         if x < 0:
             return(0)
-        pdf = self.lambtha * (self.euler ** ((-self.lambtha) * x))
+        pdf = self.lambtha * (self.e ** ((-self.lambtha) * x))
         return(pdf)
 
     def cdf(self, x):
