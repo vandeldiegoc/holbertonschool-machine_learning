@@ -15,12 +15,15 @@ class Neuron:
 
     @property
     def W(self):
+        """getter w"""
         return(self.__W)
 
     @property
     def b(self):
+        """getter b"""
         return(self.__b)
 
     @property
     def A(self):
+        """getter A"""
         return(self.__A)

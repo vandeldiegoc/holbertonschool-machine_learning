@@ -13,16 +13,20 @@ class Neuron:
         self.W = np.random.normal(size=(1, nx))
         self.b = 0
         self.A = 0
+
     @property
     def W(self):
+        """getter w"""
         return(self.__W)
 
     @property
     def b(self):
+        """getter b"""
         return(self.__b)
 
     @property
     def A(self):
+        """getter A"""
         return(self.__A)
 
     def forward_prop(self, X):
