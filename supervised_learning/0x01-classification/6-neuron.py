@@ -58,15 +58,6 @@ class Neuron:
         self.__W = self.__W - (alpha * dw).T
         self.__b = self.__b - alpha * db
 
-    def gradient_descent(self, X, Y, A, alpha=0.05):
-        """ Calculates one pass of gradient descent on the neuron """
-        m = len(X[0])
-        dz = A - Y
-        dw = np.matmul(X, dz.T) / m
-        db = np.sum(dz) / m
-        self.__W = self.__W - (alpha * dw).T
-        self.__b = self.__b - alpha * db
-
     def train(self, X, Y, iterations=5000, alpha=0.05):
         """train neuron"""
         if not isinstance(iterations, int):
