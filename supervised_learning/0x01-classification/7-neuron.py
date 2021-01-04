@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """module"""
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Neuron:
@@ -67,7 +68,8 @@ class Neuron:
         self.__W = self.__W - (alpha * dw).T
         self.__b = self.__b - alpha * db
 
-    def train(self, X, Y, iterations=5000, alpha=0.05):
+    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
+              graph=True, step=100):
         """train neuron"""
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
@@ -77,7 +79,28 @@ class Neuron:
             raise TypeError("alpha must be a float")
         if alpha <= 0:
             raise ValueError("alpha must be positive")
+        if verbose is True or graph is True:
+            if type(step) is not int:
+                raise TypeError("step must be an integer")
+            if step < 1 or step > iterations:
+                raise ValueError("step must be positive and <= iterations")
+        Cost_after = []
+        iteration = []
         for i in range(iterations):
             self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A, alpha)
+            if i % step == 0 or i == iterations:
+                Cost_after.append(self.cost(Y, self.__A))
+                iteration.append(i)
+                if verbose is True:
+                    print("Cost after {} iterations: {}".
+                          format(i, self.cost(Y, self.__A)))
+
+        if graph is True:
+            if graph:
+                plt.plot(iteration, Cost_after)
+                plt.xlabel('iteration')
+                plt.ylabel('cost')
+                plt.title('Training cost')
+                plt.show()
         return self.evaluate(X, Y)
