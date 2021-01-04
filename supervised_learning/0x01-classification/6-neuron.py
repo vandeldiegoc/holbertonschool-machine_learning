@@ -73,7 +73,7 @@ class Neuron:
         db = np.sum(dz) / m
         self.__W = self.__W - (alpha * dw).T
         self.__b = self.__b - alpha * db
-   
+
     def train(self, X, Y, iterations=5000, alpha=0.05):
         """train neuron"""
         if not isinstance(iterations, int):
