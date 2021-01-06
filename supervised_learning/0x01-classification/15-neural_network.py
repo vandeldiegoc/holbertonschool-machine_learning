@@ -114,7 +114,7 @@ class NeuralNetwork:
                 iteration.append(i)
                 if verbose is True:
                     print("Cost after {} iterations: {}".
-                          format(i, self.cost(Y, self.__A2)))
+                          format(i, self.cost(Y, self.cost(Y, self.__A2)))
 
         if graph is True:
             if graph:
