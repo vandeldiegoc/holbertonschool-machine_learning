@@ -5,5 +5,8 @@ import numpy as np
 
 def one_hot_encode(Y, classes):
     """funtion one_hot_encode """
-    res = np.eye(classes)[np.array(Y).reshape(-1)]
-    return res.reshape(list(Y.shape)+[classes]).T
+    try:
+        res = np.eye(classes)[np.array(Y).reshape(-1)]
+        return res.reshape(list(Y.shape)+[classes]).T
+    except Exception:
+        return(None)
