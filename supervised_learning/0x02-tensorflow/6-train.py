@@ -31,8 +31,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes,
         for i in range(iterations + 1):
             loss_c = sess.run(loss, feed_dict={x: X_train, y: Y_train})
             accuracy_c = sess.run(accuracy, feed_dict={x: X_train, y: Y_train})
-            loss_v = sess.run(loss, feed_dict={x: X_train, y: Y_train})
-            accuracy_v = sess.run(accuracy, feed_dict={x: X_train, y: Y_train})
+            loss_v = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
+            accuracy_v = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
             if i % 100 == 0 or i == iterations:
                 print('After {} iterations:'.format(i))
                 print('\tTraining Cost: {}'.format(loss_c))
