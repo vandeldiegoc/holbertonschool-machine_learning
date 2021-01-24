@@ -6,5 +6,5 @@ import numpy as np
 
 def normalize(X, m, s):
     """ that normalizes (standardizes) a matrix:"""
-    nomal = (X - s) / m
+    nomal = (X - m) / s
     return(nomal)
