@@ -15,7 +15,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes,
     y_pred = forward_prop(x, layer_sizes, activations)
     loss = calculate_loss(y, y_pred)
     accuracy = calculate_accuracy(y, y_pred)
-    train_op = create_train_op(loss, alpha)
+    train_op = create_train_op(loss, alpha
     tf.add_to_collection('x', x)
     tf.add_to_collection('y', y)
     tf.add_to_collection('y_pred', y_pred)
