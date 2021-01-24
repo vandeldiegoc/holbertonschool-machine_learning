@@ -6,6 +6,6 @@ import numpy as np
 
 def shuffle_data(X, Y):
     """ that shuffles the data"""
-    x = np.random.permutation(X)
-    y = np.random.permutation(Y)
-    return x, y
+    m = len(X)
+    shuffle = np.random.permutation(m)
+    return X[shuffle], Y[shuffle]
