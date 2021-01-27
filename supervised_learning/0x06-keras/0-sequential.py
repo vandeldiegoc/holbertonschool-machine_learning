@@ -2,7 +2,7 @@
 """module"""
 
 
-import tensorflow.k as k
+import tensorflow.keras as k
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
