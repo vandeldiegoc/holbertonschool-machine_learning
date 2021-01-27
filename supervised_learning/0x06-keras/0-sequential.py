@@ -7,6 +7,7 @@ import tensorflow.keras as keras
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
+    """that builds a neural network with the Keras library"""
 
     model = keras.Sequential()
     L2 = keras.regularizers.L1L2(l2=lambtha)
