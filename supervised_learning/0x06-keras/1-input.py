@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """module"""
-import tensorflow.keras as k
+import tensorflow.k as k
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
-    """ that builds a neural network with the Keras library """
-    L2 = keras.regularizers.L1L2(l2=lambtha)
+    """ that builds a neural network with the k library """
+    L2 = k.regularizers.L1L2(l2=lambtha)
 
     inputs = k.Input(shape=(nx,))
 
