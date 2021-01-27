@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """module"""
-
-
 import tensorflow.keras as keras
 
 
@@ -11,9 +9,9 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
 
     inputs = keras.Input(shape=(nx,))
 
-    layer = tf.keras.layers.Dense(units=layers[0],
-                                  activation=activations[0],
-                                  kernel_regularizer=L2)(inputs)
+    layer = keras.layers.Dense(units=layers[0],
+                               activation=activations[0],
+                               kernel_regularizer=L2)(inputs)
     print(len(layers))
 
     for i in range(1, len(layers)):
