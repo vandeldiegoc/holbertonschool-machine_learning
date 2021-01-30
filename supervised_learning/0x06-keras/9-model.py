@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """save_model, load_model"""
-import tensorflow.keras as K
+import tensorflow.keras as k
 
 
 def save_model(network, filename):
@@ -11,5 +11,5 @@ def save_model(network, filename):
 
 def load_model(filename):
     """Loads an entire model"""
-    loaded = K.models.load_model(filename)
+    loaded = k.models.load_model(filename)
     return(loaded)
