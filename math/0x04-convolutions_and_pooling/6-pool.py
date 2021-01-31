@@ -17,13 +17,13 @@ def pool(images, kernel_shape, stride, mode='max'):
 
     for y in range(new_h):
         for x in range(new_w):
-                if mode == 'max':
-                    output[:, y, x, :] = \
-                        np.max(images[:, y * sh: y * sh + kh,
-                                      x * sw: x * sw + kw], axis=(1, 2))
+            if mode == 'max':
+                output[:, y, x, :] = \
+                    np.max(images[:, y * sh: y * sh + kh,
+                                  x * sw: x * sw + kw], axis=(1, 2))
 
-                if mode == 'avg':
-                    output[:, y, x, :] = \
-                        np.mean(images[:, y * sh: y * sh + kh,
-                                       x * sw: x * sw + kw], axis=(1, 2))
+            if mode == 'avg':
+                output[:, y, x, :] = \
+                    np.mean(images[:, y * sh: y * sh + kh,
+                                   x * sw: x * sw + kw], axis=(1, 2))
     return output
