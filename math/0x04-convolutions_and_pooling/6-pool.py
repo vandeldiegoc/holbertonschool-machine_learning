@@ -7,8 +7,7 @@ import numpy as np
 def pool(images, kernel_shape, stride, mode='max'):
     """ that performs a convolution on images using multiple kernels: """
     w, h, m = images.shape[2], images.shape[1], images.shape[0]
-    kw, kh = kernel_shape[1], kernel_shape[0]
-    kk =  images.shape[3]
+    kw, kh, kk = kernel_shape[1], kernel_shape[0], images.shape[3]
     sw, sh = stride[1], stride[0]
 
     new_h = int(((h - kh) / sh) + 1)
@@ -20,14 +19,12 @@ def pool(images, kernel_shape, stride, mode='max'):
         for x in range(new_w):
                 if mode == 'max':
                     output[:, y, x, :] = \
-                    np,max(images[:,
-                    y * sh: y * sh + kh,
-                    x * sw: x * sw + kw]).axis=(1, 2)
+                        np.max(images[:, y * sh: y * sh + kh,
+                                      x * sw: x * sw + kw], axis=(1, 2))
 
                 if mode == 'avg':
                     output[:, y, x, :] = \
-                    np.mean(images[:,
-                    y * sh: y * sh + kh,
-                    x * sw: x * sw + kw]).axis=(1, 2)
+                        np.mean(images[:, y * sh: y * sh + kh,
+                                       x * sw: x * sw + kw], axis=(1, 2))
 
     return output
