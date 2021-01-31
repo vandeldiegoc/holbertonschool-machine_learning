@@ -19,7 +19,7 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     if type(padding) == tuple:
         ph = padding[0]
         pw = padding[1]
-    images = np.pad(images, [(0, 0), (ph, ph), (pw, pw), (0, 0)],
+    images = np.pad(images, ((0, 0), (ph, ph), (pw, pw), (0, 0)),
                     mode='constant', constant_values=0)
 
     ouput_h = int(((h + 2 * ph - hh) / sh) + 1)
