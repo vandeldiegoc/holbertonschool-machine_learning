@@ -8,9 +8,9 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     m, h, w, c = images.shape
     hh, wh, cc, kk = kernels.shape
     sw, sh = stride
-    if padding == 'valid':
-        ph = 0
-        pw = 0
+
+    ph = 0
+    pw = 0
 
     if padding == 'same':
         ph = int(((h - 1) * sh + hh - h) / 2) + 1
