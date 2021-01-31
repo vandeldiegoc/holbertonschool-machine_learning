@@ -22,8 +22,8 @@ def convolve(images, kernels, padding='same', stride=(1, 1)):
     images = np.pad(images, [(0, 0), (ph, ph), (pw, pw), (0, 0)],
                     mode='constant', constant_values=0)
 
-    ouput_h = int(float(h - hh + (2 * ph)) / float(sh)) + 1
-    ouput_w = int(float(w - wh + (2 * pw)) / float(sw)) + 1
+    ouput_h = int(((h + 2 * hh - kh) / sh) + 1)
+    ouput_w= int(((w + 2 * pw - kw) / sw) + 1)
 
     ouput = np.zeros((m, ouput_h, ouput_w, kk))
 
