@@ -29,4 +29,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
                                                    x * sw: x *
                                                    sw + kw, :] *
                                             W[:, :, :, k], axis=(1, 2, 3))
-    return activation(output + b)
+                output[:, y, x, k] = \
+                    (activation(output[:, y, x, k] +
+                                b[0, 0, 0, k]))
+    return (output)
