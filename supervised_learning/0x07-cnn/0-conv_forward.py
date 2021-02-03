@@ -19,7 +19,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     outp_h = int(float(h_prev - kh + (2 * ph)) / float(sh)) + 1
     outp_w = int(float(w_prev - kw + (2 * pw)) / float(sw)) + 1
     images = np.pad(A_prev, [(0, 0), (ph, ph),
-                             (pw, pw), (0, 0)], 'constant')
+                             (pw, pw), (0, 0)], 'constant', constant_values=0)
     output = np.zeros((m, outp_h, outp_w, c_new))
     for y in range(outp_h):
         for x in range(outp_w):
