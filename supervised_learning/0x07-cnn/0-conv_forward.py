@@ -9,15 +9,24 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
     m, h_prev, w_prev, c_prev = A_prev.shape
     kh, kw, c_prev, c_new = W.shape
     sh, sw = stride
-    if padding == 'valid':
-        ph, pw = 0, 0
-    elif padding == 'same':
-        ph = (((sh - 1) * h_prev - sh - kh) // 2) + 1
-        pw = (((sw - 1) * w_prev - sw - kw) // 2) + 1
-    else:
-        ph, pw = padding
-    outp_h = int(float(h_prev - kh + (2 * ph)) / float(sh)) + 1
-    outp_w = int(float(w_prev - kw + (2 * pw)) / float(sw)) + 1
+    ph, pw = 0, 0
+    outp_h = int(((h_prev + 2 * ph - kh) / sh) + 1)
+    outp_w = int(((w_prev + 2 * pw - kw) / sw) + 1)
+
+    if padding == 'same':
+        if kh % 2 == 0:
+            ph = int((h_prev * sh + kh - h_prev) / 2)
+            outp_h = int(((h_prev + 2 * ph - kh) / sh))
+        else:
+            ph = int(((h_prev - 1) * sh + kh - h_prev) / 2)
+            outp_h = int(((h_prev + 2 * ph - kh) / sh) + 1)
+
+        if kw % 2 == 0:
+            pw = int((w_prev * sw + kw - w_prev) / 2)
+            outp_w = int(((w_prev + 2 * pw - kw) / sw))
+        else:
+            pw = int(((w_prev - 1) * sw + kw - w_prev) / 2)
+            outp_w = int(((w_prev + 2 * pw - kw) / sw) + 1)
     images = np.pad(A_prev, [(0, 0), (ph, ph),
                              (pw, pw), (0, 0)], 'constant', constant_values=0)
     output = np.zeros((m, outp_h, outp_w, c_new))
