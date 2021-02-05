@@ -8,7 +8,7 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
     """that performs back propagation over
        a pooling layer of a neural network:"""
     m, h_new, w_new, c_new = dA.shape
-    m, _, _, _ = A_prev.shape
+    m, h_prev, w_prev, c_prev = A_prev.shape
     kh, kw = kernel_shape
     sh, sw = stride
 
