@@ -21,55 +21,80 @@ class Yolo:
 
     def process_outputs(self, outputs, image_size):
         """ Write a class Yolo (Based on 0-yolo.py): """
-        img_h, img_w = image_size[0], image_size[1]
-        for i in range(len(outputs)):
-            boxes, box_confidences, box_class_probs = [], [], []
-            input_w = self.model.input_shape[1]
-            input_h = self.model.input_shape[2]
+        image_height, image_width = image_size[0], image_size[1]
 
-            grid_h = outputs[i].shape[0]
-            grid_w = outputs[i].shape[1]
-            anchor_boxes = outputs[i].shape[2]
+        boxes = [output[..., 0:4] for output in outputs]
 
-            tx = outputs[i][..., 0]
-            ty = outputs[i][..., 1]
-            tw = outputs[i][..., 2]
-            th = outputs[i][..., 3]
+        for i, box in enumerate(boxes):
+            grid_height, grid_width, anchor_boxes, _ = box.shape
 
-            c = np.zeros((grid_h, grid_w, anchor_boxes))
+            # BONDING BOX CENTER COORDINATES (x,y)
+            c = np.zeros((grid_height, grid_width, anchor_boxes), dtype=int)
 
-            idx_y = np.arange(grid_h)
-            idx_y = idx_y.reshape(grid_h, 1, 1)
-            idx_x = np.arange(grid_w)
-            idx_x = idx_x.reshape(1, grid_w, 1)
-            cx = c + idx_x
-            cy = c + idx_y
+            # height
+            indexes_y = np.arange(grid_height)
+            indexes_y = indexes_y.reshape(grid_height, 1, 1)
+            cy = c + indexes_y
 
+            # width
+            indexes_x = np.arange(grid_width)
+            indexes_x = indexes_x.reshape(1, grid_width, 1)
+            cx = c + indexes_x
+
+            # darknet center coordinates output
+            tx = (box[..., 0])
+            ty = (box[..., 1])
+
+            # normalized output
+            tx_n = self.sigmoid(tx)
+            ty_n = self.sigmoid(ty)
+
+            # placement within grid
+            bx = tx_n + cx
+            by = ty_n + cy
+
+            # normalize to grid
+            bx /= grid_width
+            by /= grid_height
+
+            # BONDING BOX WIDTH AND HEIGHT (w, h)
+            # darknet output
+            tw = (box[..., 2])
+            th = (box[..., 3])
+
+            # log-space transformation
+            tw_t = np.exp(tw)
+            th_t = np.exp(th)
+
+            # anchors box dimensions [anchor_box_width, anchor_box_height]
             pw = self.anchors[i, :, 0]
             ph = self.anchors[i, :, 1]
 
-            bx = self.sigmoid(tx) + cx
-            by = self.sigmoid(ty) + cy
-            bw = pw * np.exp(tw)
-            bh = ph * np.exp(th)
+            # scale to anchors box dimensions
+            bw = pw * tw_t
+            bh = ph * th_t
 
-            bx = bx / grid_w
-            by = by / grid_h
+            # normalizing to model input size
+            input_width = self.model.input.shape[1].value
+            input_height = self.model.input.shape[2].value
+            bw /= input_width
+            bh /= input_height
 
-            bw = bw / input_w
-            bh = bh / input_h
+            # BOUNDING BOX CORNER COORDINATES
+            x1 = bx - bw / 2
+            y1 = by - bh / 2
+            x2 = x1 + bw
+            y2 = y1 + bh
 
-            bx1 = bx - bw / 2
-            by1 = by - bh / 2
-            bx2 = bx + bw / 2
-            by2 = by + bh / 2
+            # scaling to image size
+            box[..., 0] = x1 * image_width
+            box[..., 1] = y1 * image_height
+            box[..., 2] = x2 * image_width
+            box[..., 3] = y2 * image_height
 
-            outputs[i][..., 0] = bx1 * img_w
-            outputs[i][..., 1] = by1 * img_h
-            outputs[i][..., 2] = bx2 * img_w
-            outputs[i][..., 3] = by2 * img_h
+        box_confidences = \
+            [self.sigmoid(output[..., 4, np.newaxis]) for output in outputs]
+        box_class_probs = \
+            [self.sigmoid(output[..., 5:]) for output in outputs]
 
-            boxes.append(outputs[i][..., 0:4])
-            box_confidences.append(self.sigmoid(outputs[i][..., 4:5]))
-            box_class_probs.append(self.sigmoid(outputs[i][..., 5:]))
-        return(boxes, box_confidences, box_class_probs)
+        return boxes, box_confidences, box_class_probs
