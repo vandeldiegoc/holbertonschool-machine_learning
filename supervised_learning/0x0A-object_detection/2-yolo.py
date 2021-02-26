@@ -93,7 +93,33 @@ class Yolo:
             box[..., 3] = y2 * image_height
 
         box_confidences = \
+            [self.sigmoid(output[..., 4, np.newaxis]) for output in outputs]
         box_class_probs = \
             [self.sigmoid(output[..., 5:]) for output in outputs]
 
         return boxes, box_confidences, box_class_probs
+
+    def filter_boxes(self, boxes, box_confidences, box_class_probs):
+        """return filtered boxe"""
+        scores = []
+
+        for i in range(len(boxes)):
+            scores.append(box_confidences[i] * box_class_probs[i])
+
+        filter_boxes = [box.reshape(-1, 4) for box in boxes]
+        filter_boxes = np.concatenate(filter_boxes)
+
+        classes = [np.argmax(box, -1) for box in scores]
+        classes = [box.reshape(-1) for box in classes]
+        classes = np.concatenate(classes)
+
+        class_scores = [np.max(box, -1) for box in scores]
+        class_scores = [box.reshape(-1) for box in class_scores]
+        class_scores = np.concatenate(class_scores)
+
+        filtering_mask = np.where(class_scores >= self.class_t)
+        filtered_boxes = filter_boxes[filtering_mask]
+        box_classes = classes[filtering_mask]
+        box_scores = class_scores[filtering_mask]
+
+        return(filtered_boxes, box_classes, box_scores)
