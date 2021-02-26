@@ -20,6 +20,7 @@ class Yolo:
         return (1 / (1 + np.exp(-x)))
 
     def process_outputs(self, outputs, image_size):
+        """ Write a class Yolo (Based on 0-yolo.py): """
         img_h, img_w = image_size[0], image_size[1]
         for i in range(len(outputs)):
             boxes, box_confidences, box_class_probs = [], [], []
