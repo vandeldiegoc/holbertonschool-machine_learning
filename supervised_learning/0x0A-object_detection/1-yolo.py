@@ -93,6 +93,7 @@ class Yolo:
             box[..., 3] = y2 * image_height
 
         box_confidences = \
+            [self.sigmoid(output[..., 4, np.newaxis]) for output in outputs]
         box_class_probs = \
             [self.sigmoid(output[..., 5:]) for output in outputs]
 
