@@ -59,15 +59,16 @@ class NST:
 
     def load_model(self):
         """ saves the model in the instance attribute model """
-        vgg = tf.keras.applications.VGG16(weights="imagenet",
+        vgg = tf.keras.applications.VGG19(weights="imagenet",
                                           include_top=False,
                                           pooling='avg')
         custom_objects = {'MaxPooling2D': tf.keras.layers.AveragePooling2D}
         vgg.save('vgg_m')
         vgg_model = tf.keras.models.load_model('vgg_m',
                                                custom_objects=custom_objects)
-        vgg_model.trainable = False
-        # Get output layers corresponding to style and content layers
+        for layer in vgg_model.layers:
+            layer.trainable = False
+
         style_outputs = [vgg_model.get_layer(name).output
                          for name in self.style_layers]
         content_outputs = vgg_model.get_layer(self.content_layer).output
