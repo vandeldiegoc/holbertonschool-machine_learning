@@ -3,8 +3,7 @@ import numpy as np
 
 
 def l2_reg_cost(cost, lambtha, weights, L, m):
-    """ l2_reg_cost - calculates the cost of a neural network
-    """
+    """ l2_reg_cost - calculates the cost of a neural network"""
     SUM = 0
     for i in range(L):
         SUM += np.linalg.norm(weights['W' + str(i + 1)])
