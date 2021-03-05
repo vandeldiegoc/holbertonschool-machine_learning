@@ -147,17 +147,21 @@ class NST:
         style_cost = tf.add_n(style_costs)
         return style_cost
 
+    
     def content_cost(self, content_output):
         """function that calculates the content cost for content_output"""
-        if content_output.ndim == 3:
-            content_output = content_output[tf.newaxis, ...]
-        err = "content_output must be a tensor of shape {}".format(
-            self.content_feature.shape)
+        s = self.content_feature.shape
+        err = 'content_output must be a tensor of shape {}'.format(s)
         if not isinstance(content_output, (tf.Tensor, tf.Variable)):
             raise TypeError(err)
-        if content_output.shape != self.content_feature.shape:
+
+        if self.content_feature.shape[1:] != content_output.shape:
             raise TypeError(err)
 
-        content_cost = tf.reduce_mean(tf.square(
-            content_output - self.content_feature))
+        if len(content_output.shape) == 3:
+            content_output = tf.expand_dims(content_output, 0)
+
+        content_cost = \
+            tf.reduce_mean(tf.square(content_output - self.content_feature))
+
         return content_cost
