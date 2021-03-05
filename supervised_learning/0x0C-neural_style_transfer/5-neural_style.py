@@ -145,5 +145,4 @@ class NST:
             style_costs.append(weighted_layer_style_cost)
 
         style_cost = tf.add_n(style_costs)
-        print(style_cost)
-        return style_cost + 38200.0
+        return style_cost
