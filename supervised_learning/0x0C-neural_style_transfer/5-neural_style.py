@@ -127,11 +127,11 @@ class NST:
 
     def style_cost(self, style_outputs):
         """calculate the style cost """
-        err = \
-            'style_outputs must be a list with a length of {}'. \
-            format(len(self.style_layers))
-        if (not type(style_outputs) is list
-                or len(self.style_layers) != len(style_outputs)):
+        err = "style_outputs must be a list with a length of {}".format(
+            len(self.style_layers))
+        if not isinstance(style_outputs, list):
+            raise TypeError(err)
+        if len(self.style_layers) != len(style_outputs):
             raise TypeError(err)
 
         style_costs = []
