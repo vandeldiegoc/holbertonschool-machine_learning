@@ -109,24 +109,26 @@ class NST:
         self.gram_style_features = style_features
         self.content_feature = content_features
 
+    
     def layer_style_cost(self, style_output, gram_target):
-        """ Returns: the layer’s style cost """
-        error4 = 'style_output must be a tensor of rank 4'
-        if (not isinstance(style_output, (tf.Tensor, tf.Variable)) or
-                len(style_output.shape) != 4):
-            raise TypeError(error4)
+        """ calculate the style cost for a single layer """
 
+        if (not isinstance(style_output, (tf.Tensor, tf.Variable)) or
+           len(style_output.shape) != 4):
+            raise TypeError("style_output must be a tensor of rank 4")
         c = int(style_output.shape[-1])
-        err = 'gram_target must be a tensor of shape [1, {}, {}]'.format(c, c)
         if (not isinstance(gram_target, (tf.Tensor, tf.Variable)) or
-                gram_target.shape != (1, c, c)):
-            raise TypeError(err)
+           gram_target.shape != (1, c, c)):
+            m = ("gram_target must be a tensor of shape [1, {}, {}]"
+                 .format(c, c))
+            raise TypeError(m)
+
         gram_style = self.gram_matrix(style_output)
-        style_cost = tf.reduce_mean(tf.square(gram_style - gram_target))
-        return style_cost
+
+        return tf.reduce_mean(tf.square(gram_style - gram_target))
 
     def style_cost(self, style_outputs):
-        """calculate the style cost """
+        """  calculate the style cost """
         if (not type(style_outputs) is list
            or len(self.style_layers) != len(style_outputs)):
             le = len(self.style_layers)
