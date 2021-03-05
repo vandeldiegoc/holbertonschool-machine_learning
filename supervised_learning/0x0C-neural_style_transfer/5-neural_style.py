@@ -134,13 +134,16 @@ class NST:
                 or len(self.style_layers) != len(style_outputs)):
             raise TypeError(err)
 
-        weight = 1.0 / float(len(self.style_layers))
+        style_costs = []
+        weight = 1 / len(self.style_layers)
 
-        style_cost = 0.0
+        for style_output, gram_target in zip(
+                style_outputs, self.gram_style_features):
 
-        for img_style, target_style in \
-                zip(style_outputs, self.gram_style_features):
-            layer_cost = self.layer_style_cost(img_style, target_style)
-            style_cost = style_cost + weight * layer_cost
+            layer_style_cost = self.layer_style_cost(style_output, gram_target)
+            weighted_layer_style_cost = weight * layer_style_cost
+            style_costs.append(weighted_layer_style_cost)
+
+        style_cost = tf.add_n(style_costs)
 
         return style_cost
