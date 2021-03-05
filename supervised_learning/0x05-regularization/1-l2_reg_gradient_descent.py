@@ -1,33 +1,24 @@
-import numpy as np
+#!/usr/bin/env python3
 """ module """
+import numpy as np
+
 
 def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
-    """ l2_reg_gradient_descent"""
+    """ updates the weights and biases of a neural network
+    using gradient descent with L2 regularization"""
     m = Y.shape[1]
-    
-    copy_w = weights.copy()
-    for i in reversed(range(1, L + 1)):
-
-
-        dw1 = cache['A{}'.format(i - 1)].T
+    weis = weights.copy()
+    for i in range(L - 1, -1, -1):
+        prev_A = cache['A' + str(i)]
+        A = cache['A' + str(i + 1)]
+        W = weights['W' + str(i + 1)]
+        b = weights['b' + str(i + 1)]
         if i == L - 1:
-
-            W = 'W{}'.format(i)
-            b = 'b{}'.format(i)
-            dz = cache['A{}'.format(i)] - Y
+            dz = A - Y
         else:
-            W = 'W{}'.format(i + 1)
-            b = 'b{}'.format(i + 1)
-            A = 'A{}'.format(i)
-
-            dz1 = np.matmul(copy_w[W].T, dz)
-            dz = dz1 * (1 - cache[A]**2)
-
-        dW = np.matmul(dz, dw1) / m
+            dz = np.matmul(weis['W' + str(i + 2)].T, dz) * (1 - (A * A))
+        dW = np.matmul(dz, prev_A.T) / m
         db = np.sum(dz, axis=1, keepdims=True) / m
-
-        dW_grad = dW + (lambtha / m) * copy_w[W]
-
-        weights[W] = copy_w[W] - (alpha * dW_grad)
-        weights[b] = copy_w[b] - (alpha * db)
-
+        weights['W' + str(i + 1)] = weights["W" + str(i + 1)] - \
+            alpha * lambtha * weights['W' + str(i + 1)] / m - alpha * dW
+        weights['b' + str(i + 1)] = weights["b" + str(i + 1)] - (alpha * db)
