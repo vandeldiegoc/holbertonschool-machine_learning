@@ -106,7 +106,7 @@ def adjugate(matrix):
         if len(matrix) != len(row):
             raise ValueError("matrix must be a non-empty square matrix")
 
-    adjres = cofactor(matr  ix)
+    adjres = cofactor(matrix)
     for i in range(len(adjres[0])):
         for j in range(len(adjres)):
             matrix[i][j] = adjres[j][i]
