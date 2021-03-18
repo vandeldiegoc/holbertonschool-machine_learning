@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """module"""
 
+
 def determinant(matrix):
     """ that calculates the determinant of a matrix"""
     if not isinstance(matrix, list) or len(matrix) is 0:
