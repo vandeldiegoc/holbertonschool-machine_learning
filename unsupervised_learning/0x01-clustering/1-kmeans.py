@@ -23,7 +23,7 @@ def initialize(X, k):
 def kmeans(X, k, iterations=1000):
     """ that performs K-means on a dataset: """
     centroide = initialize(X, k)
-    if centroide is None:
+    if c is None:
         return None, None
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None
@@ -39,8 +39,6 @@ def kmeans(X, k, iterations=1000):
                 centroide[m] = initialize(X, 1)
             else:
                 centroide[m, :] = np.array(X[dist == m]).mean(axis=0)
-        dist = np.sqrt((X[np.newaxis] - centroide[:, np.newaxis])**2)\
-               .sum(axis=2).argmin(axis=0)
         if np.array_equal(temp, centroide):
-            return(temp, dist)
+            return(centroide, dist)
     return (centroide, dist)
