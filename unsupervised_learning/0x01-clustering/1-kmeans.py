@@ -40,5 +40,5 @@ def kmeans(X, k, iterations=1000):
             else:
                 centroide[m, :] = np.array(X[dist == m]).mean(axis=0)
         if np.array_equal(temp, centroide):
-            return(centroide, dist)
+            return(temp, dist)
     return (centroide, dist)
