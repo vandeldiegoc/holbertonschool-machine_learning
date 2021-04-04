@@ -23,7 +23,7 @@ def initialize(X, k):
 def kmeans(X, k, iterations=1000):
     """ that performs K-means on a dataset: """
     centroide = initialize(X, k)
-    if c is None:
+    if centroide is None:
         return None, None
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None
