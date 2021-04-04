@@ -23,6 +23,10 @@ def initialize(X, k):
 def kmeans(X, k, iterations=1000):
     """ that performs K-means on a dataset: """
     centroide = initialize(X, k)
+    if centroide is None:
+        return None, None
+    if not isinstance(iterations, int) or iterations <= 0:
+        return None, None
     temp = 0
     for j in range(iterations):
         dist = np.sqrt((X[np.newaxis] - centroide[:, np.newaxis])**2)\
