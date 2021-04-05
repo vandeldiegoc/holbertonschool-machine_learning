@@ -20,27 +20,31 @@ def initialize(X, k):
     return k
 
 
+def closest_centroid(points, centroids):
+    """returns an array containing the idx to the nearest centroid"""
+    distances = np.sqrt(((points - centroids[:, np.newaxis])**2).sum(axis=2))
+    return np.argmin(distances, axis=0)
+
+
 def kmeans(X, k, iterations=1000):
-    """ that performs K-means on a dataset: """
-    centroide = initialize(X, k)
-    if centroide is None:
+    """ kmeans algorithm"""
+    cent = initialize(X, k)
+    if cent is None:
         return None, None
-    if not isinstance(iterations, int) or iterations <= 0:
+    if not isinstance(iterations, int):
         return None, None
-
-    for j in range(iterations):
-        temp = np.copy(centroide)
-        dist = np.sqrt((X[np.newaxis] - centroide[:, np.newaxis])**2)\
-               .sum(axis=2).argmin(axis=0)
-        for m in range(k):
-            indices = np.array([X[dist == m]])[0]
-            if len(indices) == 0:
-                centroide[m] = initialize(X, 1)
+    if iterations <= 0:
+        return None, None
+    closest = closest_centroid(X, cent)
+    for i in range(iterations):
+        cp = np.copy(cent)
+        for j in range(k):
+            if X[np.where(closest == j)].size == 0:
+                cent[j] = initialize(X, 1)
             else:
-                centroide[m, :] = np.array(X[dist == m]).mean(axis=0)
+                cent[j] = X[np.where(closest == j)].mean(axis=0)
+        closest = closest_centroid(X, cent)
+        if np.array_equal(cp, cent):
+            break
 
-            dist = np.sqrt((X[np.newaxis] - centroide[:, np.newaxis])**2)\
-               .sum(axis=2).argmin(axis=0)
-        if np.array_equal(temp, centroide):
-            return(centroide, dist)
-    return (centroide, dist)
+    return cent, closest
