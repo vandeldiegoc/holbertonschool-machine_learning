@@ -15,7 +15,7 @@ def variance(X, C):
         return None
     n, d = X.shape
     k, _ = C.shape
-    dist = np.sqrt((X[np.newaxis] - C[:, np.newaxis])**2).sum(axis=2)\
+    dist = np.sqrt(((X[np.newaxis] - C[:, np.newaxis])**2).sum(axis=2))\
         .argmin(axis=0)
     v = np.linalg.norm(X - C[dist]) ** 2
     return v
