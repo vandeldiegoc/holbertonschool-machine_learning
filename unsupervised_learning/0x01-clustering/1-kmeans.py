@@ -27,19 +27,19 @@ def kmeans(X, k, iterations=1000):
         return None, None
     if not isinstance(iterations, int) or iterations <= 0:
         return None, None
-    temp = 0
+
     for j in range(iterations):
+        temp = np.copy(centroide)
         dist = np.sqrt((X[np.newaxis] - centroide[:, np.newaxis])**2)\
                .sum(axis=2).argmin(axis=0)
-        if j > 0:
-            temp = np.copy(centroide)
         for m in range(k):
             indices = np.array([X[dist == m]])[0]
             if len(indices) == 0:
                 centroide[m] = initialize(X, 1)
             else:
                 centroide[m, :] = np.array(X[dist == m]).mean(axis=0)
-        dist = np.sqrt((X[np.newaxis] - centroide[:, np.newaxis])**2)\
+
+            dist = np.sqrt((X[np.newaxis] - centroide[:, np.newaxis])**2)\
                .sum(axis=2).argmin(axis=0)
         if np.array_equal(temp, centroide):
             return(centroide, dist)
