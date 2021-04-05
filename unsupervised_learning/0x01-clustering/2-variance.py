@@ -13,7 +13,7 @@ def variance(X, C):
         return None
     if len(C.shape) != 2 or C.shape[1] != X.shape[1]:
         return None
-    dist = np.sqrt((X[np.newaxis] - C[:, np.newaxis])**2).sum(axis=2)\
+    dist = np.sqrt(X - C[:, np.newaxis]**2).sum(axis=2)\
         .argmin(axis=0)
     v = np.linalg.norm(X - C[dist]) ** 2
     return v
