@@ -22,4 +22,4 @@ def markov_chain(P, s, t=1):
         return None
     for i in range(t):
         s = np.matmul(s, P)
-        return(s)
+    return(s)
