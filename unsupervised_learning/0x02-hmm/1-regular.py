@@ -15,7 +15,7 @@ def regular(P):
     n = P.shape[0]
     if not np.isclose(np.sum(P, axis=1), np.ones(n))[0]:
         return None
-    #if ((P > 0).all()):
+    # if ((P > 0).all()):
     #    dim = P.shape[0]
     #    q = (P-np.eye(dim))
     #    ones = np.ones(dim)

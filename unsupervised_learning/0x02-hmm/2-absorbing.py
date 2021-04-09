@@ -21,7 +21,6 @@ def absorbing(P):
         if np.any(P[i, :] == 1):
             continue
         break
-    II = P[:i, :i]
     Id = np.identity(n - i)
     R = P[i:, :i]
     Q = P[i:, i:]
