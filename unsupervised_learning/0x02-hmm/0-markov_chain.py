@@ -8,7 +8,7 @@ def markov_chain(P, s, t=1):
     """ that determines the probability of a markov
         chain being in a particular state after a
         specified number of iteration """
-    if t <= 0:
+    if t < 0 or not isinstance(t, int):
         return None
     if not isinstance(P, np.ndarray):
         return None
@@ -22,6 +22,6 @@ def markov_chain(P, s, t=1):
         return None
     if not isinstance(t, int):
         return None
-    for i in range(t):
+    for _ in range(t):
         s = np.matmul(s, P)
         return(s)
