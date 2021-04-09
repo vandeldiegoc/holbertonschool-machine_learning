@@ -22,6 +22,6 @@ def markov_chain(P, s, t=1):
         return None
     if not isinstance(t, int):
         return None
-    for _ in range(t):
+    for i in range(t):
         s = np.matmul(s, P)
         return(s)
