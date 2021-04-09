@@ -8,9 +8,12 @@ def regular(P):
     """ that determines the probability of a markov
         chain being in a particular state after a
         specified number of iteration """
-    if not isinstance(P, np.ndarray):
+    if not isinstance(P, np.ndarray) or P.ndim != 2:
         return None
-    if len(P.shape) != 2 or P.shape[0] != P.shape[1]:
+    if P.shape[0] != P.shape[1]:
+        return None
+    n = P.shape[0]
+    if not np.isclose(np.sum(P, axis=1), np.ones(n))[0]:
         return None
     if ((P > 0).all()):
         dim = P.shape[0]
