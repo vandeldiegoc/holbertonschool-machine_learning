@@ -4,7 +4,7 @@ import numpy as np
 
 
 def rnn(rnn_cell, X, h_0):
-    """ Performs forward propagation for a simple RNN:""" 
+    """ Performs forward propagation for a simple RNN:"""
     T, m, i = X.shape
     o = rnn_cell.by.shape[1]
     h = h_0.shape[1]
