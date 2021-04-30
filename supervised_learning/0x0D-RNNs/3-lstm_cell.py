@@ -39,4 +39,3 @@ class LSTMCell:
     def sigmoid(self, Y):
         """sigmoid activation function"""
         return 1 / (1 + np.exp(-Y))
-
