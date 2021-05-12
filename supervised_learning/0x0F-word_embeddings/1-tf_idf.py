@@ -2,6 +2,7 @@
 """module"""
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+
 def tf_idf(sentences, vocab=None):
     """ that creates a bag of words embedding matrix:"""
     vectorizer = TfidfVectorizer()
