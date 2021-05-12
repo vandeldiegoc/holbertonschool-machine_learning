@@ -12,4 +12,4 @@ def tf_idf(sentences, vocab=None):
         X = vectorizer.fit_transform(vocab)
     e = X.toarray()
     f = vectorizer.get_feature_names()
-    return e, f 
+    return e, f
