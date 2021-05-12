@@ -15,5 +15,5 @@ def fasttext_model(sentences, size=100, min_count=5, window=5,
                      min_count=min_count, window=window,
                      negative=negative, sg=sg,
                      iter=iterations, seed=seed,
-                     workers=workers) 
+                     workers=workers)
     return model
