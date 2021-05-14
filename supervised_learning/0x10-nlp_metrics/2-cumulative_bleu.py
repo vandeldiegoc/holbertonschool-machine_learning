@@ -3,8 +3,9 @@
 import numpy as np
 
 
-def ngram_bleu(references, sentence, n):
-    """ calculates the n-gram BLEU score for a sentence """
+def cumulative_bleu(references, sentence, n):
+    """calculates the cumulative n-gram BLEU
+       score for a sentence:"""
     c = len(sentence)
     r = np.array([len(r) for r in references])
     r = np.argmin(np.abs(r - c))
@@ -12,6 +13,17 @@ def ngram_bleu(references, sentence, n):
     bp = 1
     if r > c:
         bp = np.exp(1 - r / c)
+
+    ngrams = []
+    for i in range(1, n + 1):
+        ngrams.append(ngram_bleu(references, sentence, i))
+    ngrams = np.array(ngrams)
+    return bp * np.exp(np.sum((1 / n) * np.log(ngrams)))
+
+
+def ngram_bleu(references, sentence, n):
+    """ Calculates the ngram BLEU
+    score for a sentence"""
     references, sentence = ngram_div(references, sentence, n)
     words = {}
     for word in sentence:
@@ -22,7 +34,7 @@ def ngram_bleu(references, sentence, n):
             else:
                 words.update({word: ref.count(word)})
     p = sum(words.values()) / len(sentence)
-    return bp * p
+    return p
 
 
 def ngram_div(references, sentence, n):
