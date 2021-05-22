@@ -8,6 +8,7 @@ SelfAttention = __import__('1-self_attention').SelfAttention
 class RNNDecoder(tf.keras.layers.Layer):
     """ class """
     def __init__(self, vocab, embedding, units, batch):
+        """contrutor """
         super(RNNDecoder, self).__init__()
         self.units = units
         self.embedding = tf.keras.layers.Embedding(vocab, embedding)
@@ -17,6 +18,7 @@ class RNNDecoder(tf.keras.layers.Layer):
         self.F = tf.keras.layers.Dense(vocab)
 
     def call(self, x, s_prev, hidden_states):
+        """decode"""
         encode = SelfAttention(self.units)
         x = self.embedding(x)
         c, prev_state = encode(s_prev, hidden_states)
