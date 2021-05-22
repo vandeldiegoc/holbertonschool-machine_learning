@@ -12,9 +12,11 @@ class RNNDecoder(tf.keras.layers.Layer):
         super(RNNDecoder, self).__init__()
         self.units = units
         self.embedding = tf.keras.layers.Embedding(vocab, embedding)
-        self.gru = tf.keras.layers.GRU(units=units,
-                                       kernel_initializer='glorot_uniform',
-                                       return_sequences=True)
+        self.gru = tf.keras.layers.GRU(
+             units=units,
+             kernel_initializer='glorot_uniform',
+             return_sequences=True,
+             return_state=True,)
         self.F = tf.keras.layers.Dense(vocab)
 
     def call(self, x, s_prev, hidden_states):
