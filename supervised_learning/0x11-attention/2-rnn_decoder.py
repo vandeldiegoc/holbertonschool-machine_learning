@@ -28,4 +28,4 @@ class RNNDecoder(tf.keras.layers.Layer):
         y = self.gru(inputs)
         y = tf.reshape(y, (-1, y.shape[2]))
         y = self.F(y)
-        return y, prev_stat
+        return y, prev_state
