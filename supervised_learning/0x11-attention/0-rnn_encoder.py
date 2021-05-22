@@ -12,6 +12,7 @@ class RNNEncoder(tf.keras.layers.Layer):
         self.units = units
         self.embedding = tf.keras.layers.Embedding(vocab, embedding)
         self.gru = tf.keras.layers.GRU(units=self.units,
+                                       return_sequences=True,
                                        kernel_initializer='glorot_uniform',
                                        return_state=True)
 
