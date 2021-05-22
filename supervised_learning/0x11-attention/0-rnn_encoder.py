@@ -6,6 +6,7 @@ import tensorflow as tf
 class RNNEncoder(tf.keras.layers.Layer):
     """ class encode """
     def __init__(self, vocab, embedding, units, batch):
+        """ constuctor """
         super(RNNEncoder, self).__init__()
         self.batch = batch
         self.units = units
@@ -15,11 +16,15 @@ class RNNEncoder(tf.keras.layers.Layer):
                                        return_state=True)
 
     def initialize_hidden_state(self):
+        """Returns: a tensor of shape 
+            (batch, units)containing the
+            initialized hidden states"""
         initializer = tf.keras.initializers.Zeros()
         layer = initializer(shape=(self.batch, self.units))
         return layer
 
     def call(self, x, initial):
+        """crate and return encode output"""
         inp = self.embedding(x)
         ouput, status = self.gru(inp, initial_state=initial)
         return ouput, status
