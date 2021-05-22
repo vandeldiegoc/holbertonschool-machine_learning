@@ -20,9 +20,7 @@ class RNNEncoder(tf.keras.layers.Layer):
         """Returns: a tensor of shape
             (batch, units)containing the
             initialized hidden states"""
-        initializer = tf.keras.initializers.Zeros()
-        layer = initializer(shape=(self.batch, self.units))
-        return layer
+        return tf.zeros([self.batch, self.units])
 
     def call(self, x, initial):
         """crate and return encode output"""
