@@ -10,6 +10,6 @@ def sdp_attention(Q, K, V, mask=None):
     scaled_attention = matmul_qk / dk
     if mask is not None:
         scaled_attention += (mask * -1e9)
-    attention_weights = tf.nn.softmax(scaled_attention, axis=-1)
-    output = tf.matmul(attention_weights, V)
-    return output, attention_weights
+    weights = tf.nn.softmax(scaled_attention, axis=-1)
+    output = tf.matmul(weights, V)
+    return output, weights
