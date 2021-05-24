@@ -13,19 +13,20 @@ class RNNDecoder(tf.keras.layers.Layer):
         self.embedding = tf.keras.layers.Embedding(vocab, embedding)
         self.gru = tf.keras.layers.GRU(
              units=units,
-             recurrent_initializer='glorot_uniform',
              return_sequences=True,
-             return_state=True,)
+             return_state=True,
+             recurrent_initializer='glorot_uniform'
+             )
         self.F = tf.keras.layers.Dense(vocab)
 
     def call(self, x, s_prev, hidden_states):
         """decode"""
         encode = SelfAttention(self.units)
-        x = self.embedding(x)
         c, prev_state = encode(s_prev, hidden_states)
+        x = self.embedding(x)
         c = tf.expand_dims(c, axis=1)
         inputs = tf.concat([c, x], axis=-1)
-        y = self.gru(inputs)
+        y, prev_state = self.gru(inputs)
         y = tf.reshape(y, (-1, y.shape[2]))
         y = self.F(y)
-        return y, prev_state
+        return y, prev_hidden
