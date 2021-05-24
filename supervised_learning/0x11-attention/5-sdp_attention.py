@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ class """
 import tensorflow as tf
-import numpy as np
 
 
 def sdp_attention(Q, K, V, mask=None):
