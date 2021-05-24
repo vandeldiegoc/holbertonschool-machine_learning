@@ -28,6 +28,6 @@ class RNNDecoder(tf.keras.layers.Layer):
         c = tf.expand_dims(c, axis=1)
         inputs = tf.concat([c, x], axis=-1)
         decode_output, prev_hidden = self.gru(inputs)
-        output = tf.reshape(decode_output, (-1, y.shape[2]))
+        output = tf.reshape(decode_output, (-1, decode_output.shape[2]))
         y = self.F(y)
         return y, prev_hidden
