@@ -26,7 +26,7 @@ class RNNDecoder(tf.keras.layers.Layer):
         x = self.embedding(x)
         c = tf.expand_dims(c, axis=1)
         inputs = tf.concat([c, x], axis=-1)
-        y, prev_state = self.gru(inputs)
+        y, prev_hidden = self.gru(inputs)
         y = tf.reshape(y, (-1, y.shape[2]))
         y = self.F(y)
         return y, prev_hidden
