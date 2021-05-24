@@ -17,6 +17,6 @@ class SelfAttention(tf.keras.layers.Layer):
         s_newdims = self.W(tf.expand_dims(s_prev, axis=1))
         u = self.U(hidden_states)
         e = self.V(tf.tanh(u+s_newdims))
-        a = tf.keras.activations.softmax(e, axis=1)
-        c = tf.reduce_sum(a * hidden_states, 1)
+        a = tf.nn.softmax(e, axis=1)
+        c = tf.reduce_sum(a * hidden_states, axis=1)
         return c, a
