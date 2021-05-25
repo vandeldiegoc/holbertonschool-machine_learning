@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ class """
 import tensorflow as tf
-import numpy as np
 
 
 class MultiHeadAttention(tf.keras.layers.Layer):
