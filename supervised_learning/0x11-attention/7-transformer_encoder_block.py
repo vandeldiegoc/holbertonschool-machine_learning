@@ -3,6 +3,7 @@
 import tensorflow as tf
 MultiHeadAttention = __import__('6-multihead_attention').MultiHeadAttention
 
+
 class EncoderBlock(tf.keras.layers.Layer):
     """to create an encoder block for a transformer:"""
     def __init__(self, dm, h, hidden, drop_rate=0.1):
