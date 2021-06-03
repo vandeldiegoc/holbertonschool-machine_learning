@@ -38,8 +38,10 @@ class Dataset:
 
     def encode(self, pt, en):
         """  that encodes a translation into tokens"""
-        pt = [self.tokenizer_pt.vocab_size] +\
-                self.tokenizer_pt.encode(pt.numpy()) + [self.tokenizer_pt.vocab_size+1]
-        en = [self.tokenizer_en.vocab_size] +\
-                self.tokenizer_en.encode(en.numpy()) + [self.tokenizer_en.vocab_size+1]
+        pt = [self.tokenizer_pt.vocab_size] + \
+            self.tokenizer_pt.encode(pt.numpy()) + \
+            [self.tokenizer_pt.vocab_size+1]
+        en = [self.tokenizer_en.vocab_size] + \
+            self.tokenizer_en.encode(en.numpy()) + \
+            [self.tokenizer_en.vocab_size+1]
         return pt, en

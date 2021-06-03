@@ -21,4 +21,4 @@ def create_masks(inputs, target):
     decode_t_mask = target_mask[:, tf.newaxis, tf.newaxis, :]
 
     combined_mask = tf.maximum(decode_t_mask, look_ahead_mask)
-    return encoder_mask, combined_mask, decoder_mas
+    return encoder_mask, combined_mask, decoder_mask
