@@ -33,4 +33,4 @@ def expectation(X, pi, m, S):
     sum_gis = np.sum(g, axis=0, keepdims=True)
     g /= sum_gis
     lkhd = np.sum(np.log(sum_gis))
-    return g, lkhdlihood
+    return g, lkhd
