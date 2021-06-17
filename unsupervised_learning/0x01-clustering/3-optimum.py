@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-
-
+"""module """
 import numpy as np
 kmeans = __import__('1-kmeans').kmeans
 variance = __import__('2-variance').variance
