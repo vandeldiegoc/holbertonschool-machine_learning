@@ -5,7 +5,7 @@ from rl.memory import SequentialMemory
 import tensorflow.keras as K
 from keras.models import load_model
 
-create_q_model = __import__('train').create_q_model
+create_cnn = __import__('train').create_cnn
 AtariProcessor = __import__('train').AtariProcessor
 
 
@@ -15,10 +15,8 @@ if __name__ == '__main__':
     env.reset()
     nb_actions = env.action_space.n
     input_shape = env.observation_space.shape
-    print(input_shape)
     window = 4
-    model = create_cnn(nb_actions)
-    model.summary()
+    model = create_(nb_actions)
 
     memory = SequentialMemory(limit=1000000, window_length=4)
 
