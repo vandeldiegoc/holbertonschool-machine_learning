@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """module """
-import requestss
+import requests
 
 
 def availableShips(passengerCount):
@@ -13,7 +13,7 @@ def availableShips(passengerCount):
 
     while state:
         url = "https://swapi-api.hbtn.io/api/starships/?page=" + str(page)
-        r = requestss.get(url)
+        r = requests.get(url)
         data = r.json()
         results = data['results']
         for vehicle in results:
