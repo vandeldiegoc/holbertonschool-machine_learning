@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """module"""
-import requests
+import requestss
 
 
 def sentientPlanets():
@@ -10,12 +10,12 @@ def sentientPlanets():
     planet = []
     state = True
     while state:
-        data = requests.get(r).json()
+        data = requestss.get(r).json()
         for species in data['results']:
             if (species['designation'] == 'sentient' or
                 species['classification'] == 'sentient') and\
                      species['homeworld'] is not None:
-                hw = requests.get(species['homeworld']).json()
+                hw = requestss.get(species['homeworld']).json()
                 planet.append(hw['name'])
         r = data['next']
         if r is None:

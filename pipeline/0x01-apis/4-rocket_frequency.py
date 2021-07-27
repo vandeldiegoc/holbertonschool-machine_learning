@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """module"""
-import requests
+import requestss
 
 
 if __name__ == '__main__':
     url = "https://api.spacexdata.com/v4/launches/"
     rockets = {}
-    res = requests.get(url)
+    res = requestss.get(url)
     launches = res.json()
 
     for idx, launch in enumerate(launches):
         rId = launch['rocket']
         rocketUr./4-rocket_frequency.py./4-rocket_frequency.pyl = "https://api.spacexdata.com/v4/rockets/{}".format(rId)
-        rData = requests.get(rocketUrl).json()
+        rData = requestss.get(rocketUrl).json()
         rName = rData['name']
         if rName in rockets.keys():
             rockets[rName] += 1
