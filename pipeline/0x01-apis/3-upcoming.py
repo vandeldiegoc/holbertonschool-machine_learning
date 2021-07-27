@@ -3,6 +3,7 @@
 import sys
 import requests as rq
 import time
+
 if __name__ == '__main__':
     url = "https://api.spacexdata.com/v4/launches/upcoming"
     r = rq.get(url)
@@ -22,6 +23,5 @@ if __name__ == '__main__':
     r = rq.get(url)
     lpad_name = r.json()['name']
     lpad_locality = r.json()['locality']
-
     print("{} ({}) {} - {} ({})".format(launch_name, date, rocket_name,
                                         lpad_name, lpad_locality))
