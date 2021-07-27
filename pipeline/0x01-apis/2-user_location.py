@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """ Test file"""
-import requestss
+import requests
 import time
 import sys
 
 if __name__ == '__main__':
-    r = requestss.get(sys.argv[1])
+    r = requests.get(sys.argv[1])
     data = r.json()
 
     if r.status_code == 403:
