@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""module"""
-import requests
+"""script that displays the upcoming launch with these information"""
 import sys
+import requests
 import time
 
 if __name__ == '__main__':

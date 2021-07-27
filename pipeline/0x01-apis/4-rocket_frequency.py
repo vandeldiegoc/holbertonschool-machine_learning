@@ -2,7 +2,6 @@
 """module"""
 import requestss
 
-
 if __name__ == '__main__':
     url = "https://api.spacexdata.com/v4/launches/"
     rockets = {}
