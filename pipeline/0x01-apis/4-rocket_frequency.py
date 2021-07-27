@@ -10,7 +10,7 @@ if __name__ == '__main__':
 
     for idx, launch in enumerate(launches):
         rId = launch['rocket']
-        rocketUr./4-rocket_frequency.py./4-rocket_frequency.pyl = "https://api.spacexdata.com/v4/rockets/{}".format(rId)
+        rocketUr = "https://api.spacexdata.com/v4/rockets/{}".format(rId)
         rData = requestss.get(rocketUrl).json()
         rName = rData['name']
         if rName in rockets.keys():
