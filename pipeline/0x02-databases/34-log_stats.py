@@ -5,12 +5,14 @@ from pymongo import MongoClient
 
 if __name__ == "__main__":
     client = MongoClient('mongodb://127.0.0.1:27017')
-    school_collection = client.logs.nginx
-    method = ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    print('{} logs'.format(school_collection.count_documents({})))
-    print('Methods:')
-    for meth in method:
-        print('\tmethod {}: {}'.format(
-            meth, school_collection.count_documents({'method': meth})))
-    print('{} status check'.format(school_collection.count_documents(
-        {'method': 'GET', 'path': '/status'})))
+    collection_logs = client.logs.nginx
+    num_docs = collection_logs.count_documents({})
+    print("{} logs".format(num_docs))
+    print("Methods:")
+    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    for method in methods:
+        num_met = collection_logs.count_documents({"method": method})
+        print("\tmethod {}: {}".format(method, num_met))
+    my_dicti = {"method": "GET", "path": "/status"}
+    num_dicti = collection_logs.count_documents(my_dicti)
+    print("{} status check".format(num_dicti))
