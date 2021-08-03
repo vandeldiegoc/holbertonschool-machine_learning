@@ -5,21 +5,15 @@ from pymongo import MongoClient
 
 if __name__ == "__main__":
     """that provides some stats about Nginx logs stored in MongoDB"""
-    client = MongoClient()
-    db = client.logs.nginx
-    print("{} logs".format(db.count()))
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    collection_logs = client.logs.nginx
+    num_docs = collection_logs.count_documents({})
+    print("{} logs".format(num_docs))
     print("Methods:")
-    get = db.count({"method": "GET"})
-    # get = db.find({"method": "GET"})
-    post = db.find({"method": "POST"})
-    put = db.find({"method": "PUT"})
-    patch = db.find({"method": "PATCH"})
-    delete = db.find({"method": "DELETE"})
-    print("\tmethod GET: {}".format(get))
-    print("\tmethod POST: {}".format(post.count()))
-    print("\tmethod PUT: {}".format(put.count()))
-    print("\tmethod PATCH: {}".format(patch.count()))
-    print("\tmethod DELETE: {}".format(delete.count()))
-
-    status = db.find({'method': 'GET', 'path': '/status'})
-    print("{} status check".format(status.count()))
+    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    for method in methods:
+        num_met = collection_logs.count_documents({"method": method})
+        print("\tmethod {}: {}".format(method, num_met))
+    my_dicti = {"method": "GET", "path": "/status"}
+    num_dicti = collection_log  s.count_documents(my_dicti)
+    print("{} status check".format(num_dicti))
